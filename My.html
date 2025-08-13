@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>We're Getting Married!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Great Vibes', cursive;
+      color: #fff;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://images.pexels.com/photos/4707122/pexels-photo-4707122.jpeg?_gl=1*g4umzy*_ga*MTMyNzM0Mjg2NC4xNzUzOTc1NDcw*_ga_8JE65Q40S6*czE3NTUwNjIwMTQkbzIkZzEkdDE3NTUwNjYyMDUkajU5JGwwJGgw') no-repeat center center fixed;
+      background-size: cover;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 4em;
+      margin-bottom: 0.5em;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      font-weight: 300;
+      margin-bottom: 1em;
+    }
+
+    h3 {
+      font-weight: 400;
+    }
+
+    .countdown {
+      font-size: 1.5em;
+      margin-top: 1em;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      h2 {
+        font-size: 1.2em;
+      }
+
+      .countdown {
+        font-size: 1.2em;
+      }
+    }
+
+    /* ❤️ Heart animation styles */
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      transform: rotate(-45deg);
+      animation: floatUp 5s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-800px) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Danny & Mercy</h1>
+    <h2>We Are Getting Married!</h2>
+    <h3>Save the Date: Sept 05, 2025</h3>
+    <div class="countdown" id="countdown"></div>
+  </div>
+
+  <div class="footer">Stay tuned for more details!</div>
+
+  <!-- Floating hearts container -->
+  <script>
+    const weddingDate = new Date("2025-09-05T00:00:00");
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = weddingDate - now;
+
+      if (diff <= 0) {
+        countdownEl.innerHTML = "It's Wedding Time! 🎉";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Create floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    setInterval(createHeart, 150);
+  </script>
+</body>
+</html>
